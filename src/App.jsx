@@ -207,9 +207,6 @@ const Footer = () => {
   );
 };
 
-// HomeContent component (the actual content of the page)
-// This component holds the main sections of the portfolio page, including Firebase integration,
-// 3D background animation, and section visibility animations.
 function HomeContent() {
   // State for Firebase auth and DB instances.
   const [db, setDb] = useState(null);
@@ -389,159 +386,12 @@ function HomeContent() {
     return <div dangerouslySetInnerHTML={{ __html: iconHtml }} />;
   };
 
-  // REMOVED: 3D Background Blob Animation (Three.js)
-  /*
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    let scene, camera, renderer;
-    const blobs = [];
-    const numBlobs = 5; // Number of blobs
-    const blobColors = [
-      new THREE.Color(0xff6347), // Tomato
-      new THREE.Color(0x40e0d0), // Turquoise
-      new THREE.Color(0xee82ee), // Violet
-      new THREE.Color(0xadff2f), // GreenYellow
-      new THREE.Color(0x6495ed)  // CornflowerBlue
-    ];
-
-    let mouseX = 0, mouseY = 0;
-
-    const initThree = () => {
-      scene = new THREE.Scene();
-      camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-      camera.position.z = 20;
-
-      renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
-      renderer.setPixelRatio(window.devicePixelRatio);
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setClearColor(0x1a1a1a, 0); // Transparent background
-
-      // Add ambient light
-      const ambientLight = new THREE.AmbientLight(0x404040); // soft white light
-      scene.add(ambientLight);
-
-      // Add directional light
-      const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-      directionalLight.position.set(1, 1, 1).normalize();
-      scene.add(directionalLight);
-
-      // Create blobs
-      for (let i = 0; i < numBlobs; i++) {
-        const geometry = new THREE.SphereGeometry(3 + Math.random() * 2, 32, 32); // Varying sizes
-        const material = new THREE.MeshStandardMaterial({
-          color: blobColors[i % blobColors.length],
-          metalness: 0.1, // Slight metallic sheen
-          roughness: 0.7, // Somewhat rough surface
-          transparent: true,
-          opacity: 0.8 + Math.random() * 0.2 // Varying opacity
-        });
-        const blob = new THREE.Mesh(geometry, material);
-
-        blob.position.set(
-          (Math.random() - 0.5) * 40,
-          (Math.random() - 0.5) * 30,
-          (Math.random() - 0.5) * 20
-        );
-
-        // Store original position and a unique noise offset
-        blob.userData.originalPosition = blob.position.clone();
-        blob.userData.noiseOffset = Math.random() * 1000;
-        blob.userData.rotationSpeed = (Math.random() - 0.5) * 0.005; // Small random rotation speed
-
-        blobs.push(blob);
-        scene.add(blob);
-      }
-    };
-
-    const animate = () => {
-      requestAnimationFrame(animate);
-
-      const time = Date.now() * 0.0001; // Global time for consistent animation
-
-      blobs.forEach((blob, i) => {
-        // Subtle positional animation using sine waves and noise
-        const noiseFactor = 0.5; // Adjust how much noise affects movement
-        blob.position.x = blob.userData.originalPosition.x + Math.sin(time * 0.5 + blob.userData.noiseOffset) * (i % 2 === 0 ? 3 : 2) * noiseFactor;
-        blob.position.y = blob.userData.originalPosition.y + Math.cos(time * 0.6 + blob.userData.noiseOffset) * (i % 2 === 0 ? 2 : 3) * noiseFactor;
-        blob.position.z = blob.userData.originalPosition.z + Math.sin(time * 0.7 + blob.userData.noiseOffset) * (i % 2 === 0 ? 1.5 : 2.5) * noiseFactor;
-
-        // Apply continuous rotation
-        blob.rotation.x += blob.userData.rotationSpeed;
-        blob.rotation.y += blob.userData.rotationSpeed * 0.5;
-      });
-
-      // Camera movement based on mouse position for a subtle parallax effect.
-      if (camera) {
-        camera.position.x += (mouseX * 0.1 - camera.position.x) * 0.05;
-        camera.position.y += (-mouseY * 0.1 - camera.position.y) * 0.05;
-        camera.lookAt(scene.position); // Make the camera look at the center of the scene.
-      }
-
-      renderer.render(scene, camera);
-    };
-
-    const onWindowResize = () => {
-      if (camera && renderer) {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-      }
-    };
-
-    const onMouseMove = (event) => {
-      mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-      mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
-    };
-
-    initThree();
-    animate();
-
-    window.addEventListener('resize', onWindowResize);
-    window.addEventListener('mousemove', onMouseMove);
-
-    return () => {
-      window.removeEventListener('resize', onWindowResize);
-      window.removeEventListener('mousemove', onMouseMove);
-
-      if (renderer) {
-        renderer.dispose();
-        if (renderer.domElement) {
-          renderer.domElement.remove();
-        }
-      }
-      if (scene) {
-        scene.traverse(object => {
-          if (object.isMesh) {
-            if (object.geometry) object.geometry.dispose();
-            if (object.material) {
-              if (Array.isArray(object.material)) {
-                object.material.forEach(material => material.dispose());
-              } else {
-                object.material.dispose();
-              }
-            }
-          }
-        });
-      }
-      blobs.length = 0;
-    };
-  }, []); // Empty dependency array means this effect runs only once on mount.
-  */
-
   return (
     <div className="relative min-h-screen bg-gray-900 text-white font-inter overflow-hidden">
-      {/* Lucide Icons Script - added directly here for availability in the React component */}
       <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
-      {/* REMOVED: 3D Canvas Background for animation */}
-      {/* <canvas ref={canvasRef} className="fixed top-0 left-0 w-full h-full z-0"></canvas> */}
-
-      {/* Header component */}
       <Header />
 
-      {/* Main content container with increased top padding to accommodate fixed header */}
       <div className="relative z-10 pt-20 p-4 md:p-8 max-w-7xl mx-auto flex flex-col items-center">
         {/* Hero Section - Modified for enhanced attractiveness */}
         <section
@@ -642,8 +492,8 @@ function HomeContent() {
           {/* Right side: Image - Updated for circular shape and hover effects */}
           <div className="flex-1 flex justify-center md:justify-end relative z-10">
             <img
-              src="https://placehold.co/500x500/3B82F6/FFFFFF?text=Jaysingh+Portfolio+Image"
-              alt="Jaysingh Portfolio Illustration"
+              src="https://www.google.com/imgres?q=jaysingh%20gautam&imgurl=https%3A%2F%2Fmedia.licdn.com%2Fdms%2Fimage%2Fv2%2FD4D03AQHklcg_vswvpQ%2Fprofile-displayphoto-scale_200_200%2FB4DZeGuBOgGUAY-%2F0%2F1750311901112%3Fe%3D2147483647%26v%3Dbeta%26t%3DBHBhxMycrhYYgHOhe2CehqHmka8xv_onlRyAs--Y7Hk&imgrefurl=https%3A%2F%2Fin.linkedin.com%2Fin%2Fjaysingh-gautam-8a08692b1&docid=C2tvlNQUYrPTWM&tbnid=CES8IWYIDSPeTM&vet=12ahUKEwiJ0beJssWOAxVV-zgGHTDTCLcQM3oECBoQAA..i&w=200&h=200&hcb=2&itg=1&ved=2ahUKEwiJ0beJssWOAxVV-zgGHTDTCLcQM3oECBoQAA"
+              alt=" "
               className="w-64 h-64 md:w-80 md:h-80 rounded-full object-cover shadow-2xl transition-all duration-300 transform hover:scale-110 hover:shadow-purple-500/80"
               // Fallback for image loading errors
               onError={(e) => {
