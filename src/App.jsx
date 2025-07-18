@@ -492,8 +492,7 @@ function HomeContent() {
           {/* Right side: Image - Updated for circular shape and hover effects */}
           <div className="flex-1 flex justify-center md:justify-end relative z-10">
             <img
-              src="https://www.google.com/imgres?q=jaysingh%20gautam&imgurl=https%3A%2F%2Fmedia.licdn.com%2Fdms%2Fimage%2Fv2%2FD4D03AQHklcg_vswvpQ%2Fprofile-displayphoto-scale_200_200%2FB4DZeGuBOgGUAY-%2F0%2F1750311901112%3Fe%3D2147483647%26v%3Dbeta%26t%3DBHBhxMycrhYYgHOhe2CehqHmka8xv_onlRyAs--Y7Hk&imgrefurl=https%3A%2F%2Fin.linkedin.com%2Fin%2Fjaysingh-gautam-8a08692b1&docid=C2tvlNQUYrPTWM&tbnid=CES8IWYIDSPeTM&vet=12ahUKEwiJ0beJssWOAxVV-zgGHTDTCLcQM3oECBoQAA..i&w=200&h=200&hcb=2&itg=1&ved=2ahUKEwiJ0beJssWOAxVV-zgGHTDTCLcQM3oECBoQAA"
-              alt=" "
+              src="/profile.jpg"
               className="w-64 h-64 md:w-80 md:h-80 rounded-full object-cover shadow-2xl transition-all duration-300 transform hover:scale-110 hover:shadow-purple-500/80"
               // Fallback for image loading errors
               onError={(e) => {
